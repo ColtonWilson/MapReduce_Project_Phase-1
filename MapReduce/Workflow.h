@@ -53,14 +53,7 @@ public:
 	//Pre-condition: File is given in directory
 	//Post-condition: NA
 	//Will just read the contents of the one file
-	void inputIsFile(string inputFile, string intermediateFile, string outputFile);
-
-
-	//Pre-condition: Directory is given with no file name
-	//Post-condition: NA
-	//Will read in all files in the directory
-	void inputIsDirectory(string inputFile, string intermediateFile, string outputFile);
-
+	void startProgram(string inputFile, string intermediateFile, string outputFile);
 
 	//Pre-condition: outputFileLocation has been given
 	//Post-condition: outputFileDirectoryLocation data member will have a value
@@ -71,7 +64,7 @@ public:
 	//Pre-condition: input, intermediate, output file directories have been declared. 
 	//Post-condition: directories could be changed if not valid
 	//While loops through each file until they are valid
-	void checkFilesValid(string& inputFile, string& intermediateFile, string& outputFile);
+	void checkFilesValid(string& inputFile,string& intermediateFile, string& outputFile);
 
 	//Pre-condition: An input file is declared
 	//Post-condition: input file is changed if not valid
