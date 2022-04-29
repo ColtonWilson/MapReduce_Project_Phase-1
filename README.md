@@ -51,6 +51,16 @@ Logs can be viewed at the following location:
 -logResult.log
 -File will be located in the project folder.
 
+## Boost Unit Testing
+Program has test.cpp file for BOOST unit testing. 
+If BOOST Unit testing is not active on machine, review guide below on set-up
+
+```
+Online Guide:
+https://docs.microsoft.com/en-us/visualstudio/test/how-to-use-boost-test-for-cpp?view=vs-2022
+
+```
+
 
 # Sample Execution & Output
 
