@@ -8,14 +8,9 @@
 
 For help on installing Boost the following sources were used. 
 
-```
-Walkthrough Video:
-https://www.youtube.com/watch?v=5afpq2TkOHc&t=451s
-
-Online Guide:
-https://levelup.gitconnected.com/the-definite-guide-on-compiling-and-linking-boost-c-libraries-for-visual-studio-projects-c79464d7282d
-
-```
+-[Walkthrough Video](https://www.youtube.com/watch?v=5afpq2TkOHc&t=451s)
+<br>
+-[Online Guide](https://levelup.gitconnected.com/the-definite-guide-on-compiling-and-linking-boost-c-libraries-for-visual-studio-projects-c79464d7282d)
 
 
 ## Build
@@ -54,13 +49,9 @@ Logs can be viewed at the following location:
 ## Boost Unit Testing
 Program has test.cpp file for BOOST unit testing. 
 <br>
-If BOOST Unit testing is not active on machine, review guide below on set-up
-
-```
-Online Guide:
-https://docs.microsoft.com/en-us/visualstudio/test/how-to-use-boost-test-for-cpp?view=vs-2022
-
-```
+If BOOST Unit testing is not active on machine, review guide below on set-up.
+<br>
+-[Online Guide](https://docs.microsoft.com/en-us/visualstudio/test/how-to-use-boost-test-for-cpp?view=vs-2022)
 
 
 # Sample Execution & Output
