@@ -1,0 +1,75 @@
+Running 7 test cases...
+*****************Map_Test***************
+Input file successfully opened.
+*****************Sort_Test***************
+
+Sorting has begun. Words are being discovered.
+
+The number of words found in the intermediate file: 2
+These words are now being searched for duplicate entries.
+
+Sorting has finished.
+*****************Reduce_Test***************
+*****************SeparateFileFromDirectory_Test***************
+*****************FullRunFile_Test***************
+Input file successfully opened.
+
+Sorting has begun. Words are being discovered.
+
+The number of words found in the intermediate file: 2
+These words are now being searched for duplicate entries.
+
+Sorting has finished.
+
+Workflow is now parsing the intermediate file and calling the Reduce class on each entry.
+
+Success. Program will now terminate.
+*****************FullRunDirectory_Test***************
+Input file successfully opened.
+
+Sorting has begun. Words are being discovered.
+
+The number of words found in the intermediate file: 2
+These words are now being searched for duplicate entries.
+
+Sorting has finished.
+
+Workflow is now parsing the intermediate file and calling the Reduce class on each entry.
+
+Success. Program will now terminate.
+[2022-04-29 10:33:46.669415] [0x000034e4] [warning] Input Directory does not exist.
+
+Exception occurred: Not a valid file directory/location.
+
+Please enter a valid input file directory.
+Input File Directory: in1.txtx
+[2022-04-29 10:34:05.497720] [0x000034e4] [warning] Input Directory does not exist.
+
+Exception occurred: Not a valid file directory/location.
+
+Please enter a valid input file directory.
+Input File Directory: nothere.txt
+[2022-04-29 10:34:11.932622] [0x000034e4] [warning] Input Directory does not exist.
+
+Exception occurred: Not a valid file directory/location.
+
+Please enter a valid input file directory.
+Input File Directory: i1.txt
+[2022-04-29 10:34:17.738226] [0x000034e4] [warning] Program must write to a '.txt' file location.
+
+Exception occurred: Not a valid file directory/location.
+
+Please enter a valid temporary intermediate file directory.
+Intermediate File Directory: in1.txt
+[2022-04-29 10:34:34.108881] [0x000034e4] [warning] Program must write to a '.txt' file location.
+
+Exception occurred: Not a valid file directory/location.
+
+Please enter a valid final output file directory.
+Output File Directory: o1.txt
+
+*** No errors detected
+
+C:\Users\Colton Wilson\Desktop\CIS687 OOD\Project1\MapReduce\x64\Debug UnitTests\MapReduce.exe (process 2948) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .
