@@ -57,7 +57,10 @@ If BOOST Unit testing is not active on machine, review guide below on set-up.
 # Sample Execution & Output
 
 Program will ask for directory locations for an input file, intermediate file, and output file. 
+<br>
 Note: If a file location is inside the project folder, only the file name is needed. 
+<br>
+Note: If no intermediate.txt or output.txt is given, then a default .txt file will be given. 
 
 ```
 Input File Directory: c:\...\chosen_file.txt
