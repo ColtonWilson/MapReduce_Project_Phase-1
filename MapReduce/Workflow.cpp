@@ -108,7 +108,6 @@ void Workflow::startProgram(string inputFile, string intermediateFile, string ou
 		{
 			//Get a line of data from the input file
 			FileStreamSystem.readFromFile(inputFileStream, data);
-			cout << data;
 			//Check if data was not the end of file
 			if (data != "1")
 			{
