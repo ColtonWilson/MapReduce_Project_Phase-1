@@ -460,14 +460,17 @@ void Workflow::setIntermediateFileLocation(const string& userIntermediateFile)
 		// Create a Path object from given path string
 		boost::filesystem::path pathObj(intermediateFileToCheck);
 		//Check if using a file and not a directory
-		if (!boost::filesystem::is_regular_file(pathObj))
+		if (intermediateFileToCheck.substr(intermediateFileToCheck.find_last_of(".") + 1) != "txt")
 		{
+
 			intermediateFileToCheck = intermediateFileToCheck + "\\Intermediate.txt";
 			BOOST_LOG_TRIVIAL(warning) << "Directory must include a '.txt' file to write to at the end. Will write a Intermediate.txt in same directory. ";
+
+		}
+			
 			//Separate if it does from file
 			separateOutputPath(intermediateFileToCheck, "intermediate");
 
-		}
 		//intermediateFileLocation = userIntermediateFile;
 		intermediateFileLocation = intermediateFileToCheck;
 		//update validInputFile
@@ -498,14 +501,15 @@ void Workflow::setOutputFileLocation(const string& userOutputFile)
 		// Create a Path object from given path string
 		boost::filesystem::path pathObj(outputFileToCheck);
 		//Check if using a file and not a directory
-		if (!boost::filesystem::is_regular_file(pathObj))
+		if (outputFileToCheck.substr(outputFileToCheck.find_last_of(".") + 1) != "txt")
 		{
 			outputFileToCheck = outputFileToCheck + "\\Output.txt";
 			BOOST_LOG_TRIVIAL(warning) << "Directory must include a '.txt' file to write to at the end. Will write a Output.txt in same directory. ";
-			//Separate if it does from file
-			separateOutputPath(outputFileToCheck, "output");
+			
 
 		}
+		//Separate if it does from file
+		separateOutputPath(outputFileToCheck, "output");
 		outputFileLocation = outputFileToCheck;
 		//update validInputFile
 		validOutputFile = true;
