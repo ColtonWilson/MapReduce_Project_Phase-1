@@ -169,6 +169,14 @@ void Sorting::format() {
 	cout << "\nThe number of words found in the intermediate file: " << wordVector.size();
 	cout << "\nThese words are now being searched for duplicate entries." << endl;
 
+	// if the number of words is zero, return
+	if (wordVector.size() == 0) {
+		
+		// inform the user that sorting has finished.
+		cout << "\nSorting has finished." << endl;
+		return;
+	}
+
 	// Try to write the data back to the intermediate file in the correct
 	// format for the reduce class. Example: ("is", [1, 1, 1])
 	try {
