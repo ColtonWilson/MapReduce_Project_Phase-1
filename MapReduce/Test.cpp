@@ -49,10 +49,9 @@ BOOST_AUTO_TEST_CASE(Map_Test)
 			//This will add the data to the file given
 			Map addToFile(intermediateFile, data);
 		}
-
 	}
-	FileStreamSystem.closeInputFile(inputFileStream);
 
+	FileStreamSystem.closeInputFile(inputFileStream);
 	FileStreamSystem.openFileInstream(inputFileStream, intermediateFile);
 	FileStreamSystem.readFromFile(inputFileStream, data);
 
@@ -79,7 +78,6 @@ BOOST_AUTO_TEST_CASE(Sort_Test)
 
 	// create an instance of the Sorting class.
 	Sorting sortingObj(intermediateFilePathPntr);
-
 
 	// Create local variables. Input file stream object
 	ifstream inputFileStreamObj;
@@ -120,16 +118,16 @@ BOOST_AUTO_TEST_CASE(Sort_Test)
 BOOST_AUTO_TEST_CASE(Reduce_Test)
 {
 	cout << "*****************Reduce_Test***************" << std::endl;
-	Workflow percentCheck;
+
+	// initialize local variables
+	ofstream outputFileStream;
+
 	// Sorting and Reducing
 	// declare and initialize local variables.
 	string intermediateFilePath = "intermediate.txt"; // intermediate file path
 	string outputFilePath = "output.txt";
 	string* intermediateFilePathPntr = &intermediateFilePath;
 	string* outputFilePathPntr = &outputFilePath;
-
-	// initialize local variables
-	ofstream outputFileStream;
 
 	// open the file for editing.
 	FileManagement FileStreamSystem;
@@ -196,7 +194,7 @@ BOOST_AUTO_TEST_CASE(Reduce_Test)
 
 	string data{ "Unknown" };
 
-	FileStreamSystem.openFileInstream(inputFileStreamObj, "output.txt");
+	FileStreamSystem.openFileInstream(inputFileStreamObj, outputFilePath);
 	FileStreamSystem.readFromFile(inputFileStreamObj, data);
 
 	const char* a = "(\"this\"), 1";
@@ -211,12 +209,12 @@ BOOST_AUTO_TEST_CASE(Reduce_Test)
 BOOST_AUTO_TEST_CASE(Consistency_Test)
 {
 	cout << "*****************Consistency_Test***************" << std::endl;
-	ifstream inputFileStream1;
-	ifstream inputFileStream2;
-	ofstream intermediateFileStream1;
-	ofstream intermediateFileStream2;
-	ifstream outputFileStream1;
-	ifstream outputFileStream2;
+	ofstream ofsInput1;
+	ofstream ofsInput2;
+	ofstream ofsIntermediate1;
+	ofstream ofsIntermediate2;
+	ifstream ifsOutput1;
+	ifstream ifsOutput2;
 	string inputFile1 = "Input1.txt";
 	string inputFile2 = "Input2.txt";
 	string intermediateFile1 = "Intermediate1.txt";
@@ -225,33 +223,27 @@ BOOST_AUTO_TEST_CASE(Consistency_Test)
 	string outputFile2 = "Output2.txt";
 
 	// Create an object of the FileManagement class
-	FileManagement fileManagementObj1;
-	FileManagement fileManagementObj2;
+	FileManagement fileManagementObj;
 
 	// clear the contents of the files.
-	fileManagementObj1.clearFile(intermediateFileStream1, inputFile1);
-	fileManagementObj2.clearFile(intermediateFileStream2, inputFile2);
-	fileManagementObj1.clearFile(intermediateFileStream1, outputFile1);
-	fileManagementObj2.clearFile(intermediateFileStream2, outputFile2);
+	fileManagementObj.clearFile(ofsIntermediate1, inputFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, inputFile2);
+	fileManagementObj.clearFile(ofsIntermediate1, intermediateFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, intermediateFile2);
+	fileManagementObj.clearFile(ofsIntermediate1, outputFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, outputFile2);
 
 	//Open the input file and connect to the in stream. Then double check to make sure file is not corrupt
-	fileManagementObj1.openFileInstream(inputFileStream1, inputFile1);
-	fileManagementObj2.openFileInstream(inputFileStream2, inputFile2);
+	fileManagementObj.openFileOutstream(ofsInput1, inputFile1);
+	fileManagementObj.openFileOutstream(ofsInput2, inputFile2);
 
 	// create a string to add to the input file.
-	string firstData{ "This is a test of the consistency of the Workflow class.\n" };
+	string strData{ " This is a test of the consistency of the Workflow class. " };
 
-	// create an instance of the Map class. Add the string to the file
-	// using the Map class constructor.
-	Map addToFile(inputFile1, firstData);
-
-	// add the same data to the second text file.
-	addToFile.tokenize(inputFile2, firstData);
-
-	// add the string to the file 100 more times.
+	// add the string to the file 100 times.
 	for (int i = 0; i < 100; i++) {
-		addToFile.tokenize(inputFile1, firstData);
-		addToFile.tokenize(inputFile2, firstData);
+		ofsInput1 << strData << endl;
+		ofsInput2 << strData << endl;
 	}
 
 	// Create two instances of the Workflow class.
@@ -261,17 +253,9 @@ BOOST_AUTO_TEST_CASE(Consistency_Test)
 
 	Workflow(inputFile2, intermediateFile2, outputFile2);
 
-	// Clear the contents of the intermediate file which will hold the output of the Map class. This will also close the stream.
-	fileManagementObj1.clearFile(intermediateFileStream1, intermediateFile1);
-	fileManagementObj2.clearFile(intermediateFileStream2, intermediateFile2);
-
-	// close the input file streams.
-	fileManagementObj1.closeInputFile(inputFileStream1);
-	fileManagementObj2.closeInputFile(inputFileStream2);
-
 	// Open the output filestream and connect to the instream.
-	fileManagementObj1.openFileInstream(outputFileStream1, outputFile1);
-	fileManagementObj2.openFileInstream(outputFileStream2, outputFile2);
+	fileManagementObj.openFileInstream(ifsOutput1, outputFile1);
+	fileManagementObj.openFileInstream(ifsOutput2, outputFile2);
 
 	// Initiate a variable to hold raw data given by the input file
 	string line1{ "Unknown" };
@@ -281,8 +265,8 @@ BOOST_AUTO_TEST_CASE(Consistency_Test)
 	while ((line1 != "1") || (line2 != "1"))
 	{
 		// Get a line of data from the input file
-		fileManagementObj1.readFromFile(outputFileStream1, line1);
-		fileManagementObj2.readFromFile(outputFileStream2, line2);
+		fileManagementObj.readFromFile(ifsOutput1, line1);
+		fileManagementObj.readFromFile(ifsOutput2, line2);
 
 		// Check if data was not the end of file
 		if ((line1 != "1") || (line2 != "1"))
@@ -294,6 +278,14 @@ BOOST_AUTO_TEST_CASE(Consistency_Test)
 
 	// inform the user that the test has passed.
 	cout << "Consistency test has been passed." << std::endl;
+
+	// clear the contents of the files.
+	fileManagementObj.clearFile(ofsIntermediate1, inputFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, inputFile2);
+	fileManagementObj.clearFile(ofsIntermediate1, intermediateFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, intermediateFile2);
+	fileManagementObj.clearFile(ofsIntermediate1, outputFile1);
+	fileManagementObj.clearFile(ofsIntermediate2, outputFile2);
 }
 
 // Test the Workflow class's ability to extract a directory name from the input path to a file.
@@ -345,25 +337,39 @@ BOOST_AUTO_TEST_CASE(FullRunDirectory_Test)
 {
 	cout << "*****************FullRunDirectory_Test***************" << std::endl;
 	ifstream inputFileStream;
-	ofstream intermediateFileStream;
+	ofstream outputFileStream;
 	string inputFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\input.txt";
 	string intermediateFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\intermediate.txt";
 	string outputFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\output.txt";
 
 	//Create an object of the FileManagement class
 	FileManagement FileStreamSystem;
-	FileStreamSystem.clearFile(intermediateFileStream, inputFile);
+
+	// clear the contents of the input file.
+	FileStreamSystem.clearFile(outputFileStream, inputFile);
+	
+	// declare and initialize a string
 	string firstData{ "This" };
+
+	// map the string to the input file.
 	Map addToFile(inputFile, firstData);
 
-	Workflow(inputFile, intermediateFile, outputFile);
+	// create an object of the workflow class
+	Workflow workflowObj(inputFile, intermediateFile, outputFile);
 
+	// declare and initialize a string object.
 	string data{ "Unknown" };
 
+	// open the output file to read.
 	FileStreamSystem.openFileInstream(inputFileStream, outputFile);
+	
+	// read the first line from the output.
 	FileStreamSystem.readFromFile(inputFileStream, data);
 
+	// create a string to compare the data read from the output file.
 	const char* a = "(\"this\"), 1";
+
+	// test the comparison of the data and the string.
 	BOOST_TEST(data == a);
 
 	// inform the user that the test has passed.
