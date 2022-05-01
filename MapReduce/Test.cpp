@@ -339,8 +339,8 @@ BOOST_AUTO_TEST_CASE(FullRunDirectory_Test)
 	ifstream inputFileStream;
 	ofstream outputFileStream;
 	string inputFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\input.txt";
-	string intermediateFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\intermediate.txt";
-	string outputFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder\\output.txt";
+	string intermediateFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder";
+	string outputFile = "C:\\Users\\antho\\OneDrive\\Desktop\\CIS687 OOD\\testFolder";
 
 	//Create an object of the FileManagement class
 	FileManagement FileStreamSystem;
@@ -359,6 +359,11 @@ BOOST_AUTO_TEST_CASE(FullRunDirectory_Test)
 
 	// declare and initialize a string object.
 	string data{ "Unknown" };
+
+	// update the output file path if a directory was provided instead of a .txt file
+	if (outputFile.substr(outputFile.find_last_of(".") + 1) != "txt") {
+		outputFile = outputFile + "\\Output.txt";
+	}
 
 	// open the output file to read.
 	FileStreamSystem.openFileInstream(inputFileStream, outputFile);
